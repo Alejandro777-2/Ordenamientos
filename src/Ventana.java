@@ -9,6 +9,8 @@ public class Ventana {
     private JButton ordenarPorCodigoButton;
     private JButton ordenarPorPrecioButton;
     private JButton ordenarPorCilindrajeButton;
+    private JButton btnEliminar;
+    private JButton eliminarIndiceButton;
     private Taller miTaller = new Taller();
     public void llenarJlist(){
         DefaultListModel<Motocicleta> dml = new DefaultListModel<>();
@@ -38,6 +40,31 @@ public class Ventana {
             public void actionPerformed(ActionEvent e) {
                 miTaller.odenarCilindraje();
                 llenarJlist();
+            }
+        });
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              if(lstTaller.getSelectedIndex() != -1){
+                  Motocicleta aux = (Motocicleta) lstTaller.getSelectedValue();
+                  miTaller.getTaller().remove(aux);
+                  llenarJlist();
+              }else {
+                  JOptionPane.showMessageDialog(null, "Seleccione al menos 1 ");
+              }
+
+            }
+        });
+        eliminarIndiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(lstTaller.getSelectedIndex() != -1){
+                    miTaller.getTaller().remove(lstTaller.getSelectedIndex());
+                    llenarJlist();
+                }else {
+                    JOptionPane.showMessageDialog(null, "Seleccione al menos 1 ");
+                }
+
             }
         });
     }
